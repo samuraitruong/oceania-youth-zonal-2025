@@ -536,7 +536,7 @@ const html = `<!DOCTYPE html>
 <body>
     <div class="container">
         <div class="header-card">
-            <h1><i class="bi bi-trophy-fill"></i> Oceania Zonal Youth 2025</h1>
+            <h1><i class="bi bi-trophy-fill"></i> 2025 Oceania Youth Chess Championship</h1>
             <p class="text-muted mb-0">
                 All paid entries as of the 3rd of Dec
                 <i class="bi bi-info-circle info-icon" data-bs-toggle="modal" data-bs-target="#dataSourceModal" title="About this data"></i>
