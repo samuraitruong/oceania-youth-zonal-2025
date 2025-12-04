@@ -11,9 +11,18 @@ on:
       - master
   workflow_dispatch: # Allow manual triggering
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   generate-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     
     steps:
       - name: Checkout repository
@@ -40,4 +49,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./www
           cname: false # Set to your domain if you have one
+          force_orphan: true
 
