@@ -1,0 +1,2271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oceania Zonal Youth 2025 - Participants</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+        .container {
+            max-width: 1400px;
+        }
+        .header-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        .header-card h1 {
+            color: #667eea;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .filter-section {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        .table-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 25px;
+            overflow-x: auto;
+        }
+        .table {
+            margin-bottom: 0;
+        }
+        .table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .table thead th {
+            border: none;
+            padding: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+        .table tbody tr {
+            transition: all 0.3s ease;
+        }
+        .table tbody tr:hover {
+            background-color: #f8f9fa;
+            transform: scale(1.01);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .table tbody td {
+            padding: 15px;
+            vertical-align: middle;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .fide-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .fide-rating {
+            font-weight: 700;
+            color: #667eea;
+            font-size: 1.1rem;
+        }
+        .badge-count {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        .form-select {
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            padding: 12px 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .form-select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        .stats-badge {
+            display: inline-block;
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin: 5px;
+            font-weight: 500;
+        }
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+        }
+        .no-results i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+        @media (max-width: 768px) {
+            .header-card, .filter-section, .table-card {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+            .table {
+                font-size: 0.9rem;
+            }
+            .table thead th,
+            .table tbody td {
+                padding: 10px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-card">
+            <h1><i class="bi bi-trophy-fill"></i> Oceania Zonal Youth 2025</h1>
+            <p class="text-muted mb-0">All paid entries as of the 3rd of Dec</p>
+        </div>
+
+        <div class="filter-section">
+            <div class="row g-3 align-items-end">
+                <div class="col-md-6">
+                    <label for="divisionFilter" class="form-label fw-bold">
+                        <i class="bi bi-funnel-fill"></i> Filter by Division
+                    </label>
+                    <select class="form-select" id="divisionFilter">
+                        <option value="">All Divisions</option>
+                        <option value="Female Under 10">Female Under 10</option><option value="Female Under 12">Female Under 12</option><option value="Female Under 14">Female Under 14</option><option value="Female Under 16">Female Under 16</option><option value="Female Under 18">Female Under 18</option><option value="Female Under 20">Female Under 20</option><option value="Female Under 8">Female Under 8</option><option value="Open Under 10">Open Under 10</option><option value="Open Under 12">Open Under 12</option><option value="Open Under 14">Open Under 14</option><option value="Open Under 16">Open Under 16</option><option value="Open Under 18">Open Under 18</option><option value="Open Under 20">Open Under 20</option><option value="Open Under 8">Open Under 8</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <div class="stats-badge">
+                        <i class="bi bi-people-fill"></i> 
+                        <span id="recordCount">293</span> participants
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-card">
+            <div id="tableContainer">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Division</th><th>First Name</th><th>Surname</th><th>Country</th>
+                            <th>FIDE Title</th>
+                            <th>FIDE Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        
+                            <tr data-division="Female Under 10">
+                                <td>1</td>
+                                <td>Female Under 10</td><td>Sarah</td><td>Zuo</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1482</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 10">
+                                <td>2</td>
+                                <td>Female Under 10</td><td>Kaylin</td><td>Zhang</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">0</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 10">
+                                <td>3</td>
+                                <td>Female Under 10</td><td>Victoria</td><td>Mao</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1405</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 10">
+                                <td>4</td>
+                                <td>Female Under 10</td><td>Erin</td><td>Yuan</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1534</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 10">
+                                <td>5</td>
+                                <td>Female Under 10</td><td>Alyna</td><td>Ashik</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 10">
+                                <td>6</td>
+                                <td>Female Under 10</td><td>Bella</td><td>Xia</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1528</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 10">
+                                <td>7</td>
+                                <td>Female Under 10</td><td>JAHNAVI</td><td>MONDAL</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1425</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 10">
+                                <td>8</td>
+                                <td>Female Under 10</td><td>Clarissa</td><td>Liu</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1547</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 10">
+                                <td>9</td>
+                                <td>Female Under 10</td><td>Guangzhao (allison)</td><td>Zhou</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 10">
+                                <td>10</td>
+                                <td>Female Under 10</td><td>Joanna</td><td>CHEN</td><td></td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 10">
+                                <td>11</td>
+                                <td>Female Under 10</td><td>Bella</td><td>Xia</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1528</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 10">
+                                <td>12</td>
+                                <td>Female Under 10</td><td>Sannah</td><td>Bhatia</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 12">
+                                <td>13</td>
+                                <td>Female Under 12</td><td>Emma</td><td>Zhou</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1558</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 12">
+                                <td>14</td>
+                                <td>Female Under 12</td><td>Yuanyi ( Rebecca)</td><td>Zhao</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1591</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 12">
+                                <td>15</td>
+                                <td>Female Under 12</td><td>Grace</td><td>Wang</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">0</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 12">
+                                <td>16</td>
+                                <td>Female Under 12</td><td>Ishtar Yuying</td><td>Tse</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">0</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 12">
+                                <td>17</td>
+                                <td>Female Under 12</td><td>Nancy</td><td>Liang</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1529</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 12">
+                                <td>18</td>
+                                <td>Female Under 12</td><td>Grace</td><td>Wang</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">0</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 12">
+                                <td>19</td>
+                                <td>Female Under 12</td><td>Alexis Rian</td><td>Justo</td><td>Guam</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1581</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 12">
+                                <td>20</td>
+                                <td>Female Under 12</td><td>Cindy</td><td>Chen</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1607</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 12">
+                                <td>21</td>
+                                <td>Female Under 12</td><td>Charlotte</td><td>Chen</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1686</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 12">
+                                <td>22</td>
+                                <td>Female Under 12</td><td>Yaroslav</td><td>Koulanov</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 12">
+                                <td>23</td>
+                                <td>Female Under 12</td><td>Hamsini</td><td>Dudipalli</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1475</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 12">
+                                <td>24</td>
+                                <td>Female Under 12</td><td>Olivia</td><td>Chu</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1401</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 12">
+                                <td>25</td>
+                                <td>Female Under 12</td><td>Maria Rose</td><td>Rauiti</td><td>Nauru</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 14">
+                                <td>26</td>
+                                <td>Female Under 14</td><td>Vidushi</td><td>Dissanayake</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1908</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 14">
+                                <td>27</td>
+                                <td>Female Under 14</td><td>Baize</td><td>Li</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1848</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 14">
+                                <td>28</td>
+                                <td>Female Under 14</td><td>Audrey</td><td>GUO</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1496</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 14">
+                                <td>29</td>
+                                <td>Female Under 14</td><td>Martin</td><td>Chen</td><td>AUS</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1661</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 14">
+                                <td>30</td>
+                                <td>Female Under 14</td><td>Kavish</td><td>Nagpal</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1621</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 14">
+                                <td>31</td>
+                                <td>Female Under 14</td><td>NITHULI</td><td>LIYANAGE</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1683</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 14">
+                                <td>32</td>
+                                <td>Female Under 14</td><td>Joshua</td><td>Liu</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1840</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 14">
+                                <td>33</td>
+                                <td>Female Under 14</td><td>Lok Jim (Lauren)</td><td>Ng</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1645</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 14">
+                                <td>34</td>
+                                <td>Female Under 14</td><td>Abby</td><td>Tan</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1440</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 14">
+                                <td>35</td>
+                                <td>Female Under 14</td><td>Amy</td><td>Zhao</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1442</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 14">
+                                <td>36</td>
+                                <td>Female Under 14</td><td>Emma</td><td>Ye</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1509</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 14">
+                                <td>37</td>
+                                <td>Female Under 14</td><td>Sophia</td><td>Xu</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1495</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 14">
+                                <td>38</td>
+                                <td>Female Under 14</td><td>Vanessa</td><td>Deng</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1699</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 14">
+                                <td>39</td>
+                                <td>Female Under 14</td><td>Adele</td><td>Zhou</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1532</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 14">
+                                <td>40</td>
+                                <td>Female Under 14</td><td>Aadhya Sai</td><td>Katakam</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1518</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 14">
+                                <td>41</td>
+                                <td>Female Under 14</td><td>Latileta</td><td>Masau</td><td>Fiji</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 16">
+                                <td>42</td>
+                                <td>Female Under 16</td><td>Renee Yang</td><td>Pan</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1674</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 16">
+                                <td>43</td>
+                                <td>Female Under 16</td><td>Eléa</td><td>Delaire</td><td>New Caledonia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 16">
+                                <td>44</td>
+                                <td>Female Under 16</td><td>Abigail</td><td>Rowe</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1721</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 16">
+                                <td>45</td>
+                                <td>Female Under 16</td><td>Elaina</td><td>Qiang</td><td>Austrlaia</td>
+                                <td><span class="badge bg-primary fide-title">WCM WCM</span></td>
+                                <td><span class="fide-rating">1811</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 16">
+                                <td>46</td>
+                                <td>Female Under 16</td><td>Lou-Anne</td><td>Delrieu</td><td>Vanuatu</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1519</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 16">
+                                <td>47</td>
+                                <td>Female Under 16</td><td>Aleksey</td><td>Koulanov</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1515</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 16">
+                                <td>48</td>
+                                <td>Female Under 16</td><td>Noelle Marie</td><td>Camacho</td><td>Guam</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1436</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 18">
+                                <td>49</td>
+                                <td>Female Under 18</td><td>Alice</td><td>Wu</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1727</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 18">
+                                <td>50</td>
+                                <td>Female Under 18</td><td>Sophia</td><td>Feng</td><td>New Zealand</td>
+                                <td><span class="badge bg-primary fide-title">WCM WCM</span></td>
+                                <td><span class="fide-rating">1837</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 18">
+                                <td>51</td>
+                                <td>Female Under 18</td><td>Michelle</td><td>Lin</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1606</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 18">
+                                <td>52</td>
+                                <td>Female Under 18</td><td>Vicky</td><td>Qian</td><td>Australia</td>
+                                <td><span class="badge bg-primary fide-title">WCM WCM</span></td>
+                                <td><span class="fide-rating">1767</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 18">
+                                <td>53</td>
+                                <td>Female Under 18</td><td>Chloe</td><td>Fan</td><td>Austrlaia</td>
+                                <td><span class="badge bg-primary fide-title">WFM WFM</span></td>
+                                <td><span class="fide-rating">1979</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 18">
+                                <td>54</td>
+                                <td>Female Under 18</td><td>Hinavakamea</td><td>Helu</td><td>Tonga</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 18">
+                                <td>55</td>
+                                <td>Female Under 18</td><td>Natalie Terese</td><td>Camacho</td><td>Guam</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1549</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 18">
+                                <td>56</td>
+                                <td>Female Under 18</td><td>Kaina</td><td>Delrieu</td><td>Vanuatu</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1497</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 18">
+                                <td>57</td>
+                                <td>Female Under 18</td><td>Isabella</td><td>Guan</td><td>Australia</td>
+                                <td><span class="badge bg-primary fide-title">WCM WCM</span></td>
+                                <td><span class="fide-rating">1706</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 18">
+                                <td>58</td>
+                                <td>Female Under 18</td><td>Luna (Yuexiu)</td><td>Xu</td><td>New Zealand</td>
+                                <td><span class="badge bg-primary fide-title">WCM WCM</span></td>
+                                <td><span class="fide-rating">1872</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 18">
+                                <td>59</td>
+                                <td>Female Under 18</td><td>Deethya Sai</td><td>Katakam</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1783</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 20">
+                                <td>60</td>
+                                <td>Female Under 20</td><td>Isabelle Yixua</td><td>Ning</td><td>New Zealand</td>
+                                <td><span class="badge bg-primary fide-title">CM WFM</span></td>
+                                <td><span class="fide-rating">2057</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 20">
+                                <td>61</td>
+                                <td>Female Under 20</td><td>Tanvi Radha</td><td>Prasad</td><td>Fiji</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 20">
+                                <td>62</td>
+                                <td>Female Under 20</td><td>Nadia</td><td>Braganza</td><td>New Zealand</td>
+                                <td><span class="badge bg-primary fide-title">WFM WFM</span></td>
+                                <td><span class="fide-rating">1848</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 20">
+                                <td>63</td>
+                                <td>Female Under 20</td><td>Linda</td><td>Qian</td><td>Australia</td>
+                                <td><span class="badge bg-primary fide-title">WCM WCM</span></td>
+                                <td><span class="fide-rating">1772</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 20">
+                                <td>64</td>
+                                <td>Female Under 20</td><td>Chao Xin</td><td>Cheng</td><td>Australia</td>
+                                <td><span class="badge bg-primary fide-title">WFM WFM</span></td>
+                                <td><span class="fide-rating">2011</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 20">
+                                <td>65</td>
+                                <td>Female Under 20</td><td>Tingwen (Grace)</td><td>Yin</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 20">
+                                <td>66</td>
+                                <td>Female Under 20</td><td>Angela</td><td>He</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1646</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 20">
+                                <td>67</td>
+                                <td>Female Under 20</td><td>Alaina</td><td>Vincent Singh</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 8">
+                                <td>68</td>
+                                <td>Female Under 8</td><td>Mia</td><td>Tan</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">0</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 8">
+                                <td>69</td>
+                                <td>Female Under 8</td><td>Fedra</td><td>Simic</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 8">
+                                <td>70</td>
+                                <td>Female Under 8</td><td>Fiona Chenxi</td><td>Li</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">0</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 8">
+                                <td>71</td>
+                                <td>Female Under 8</td><td>Yun Li</td><td>Ong</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1528</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 8">
+                                <td>72</td>
+                                <td>Female Under 8</td><td>Nyra</td><td>Venkat</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1454</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 8">
+                                <td>73</td>
+                                <td>Female Under 8</td><td>Vera (Jintian)</td><td>Xu</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1501</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 8">
+                                <td>74</td>
+                                <td>Female Under 8</td><td>Kalista</td><td>Liu</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 8">
+                                <td>75</td>
+                                <td>Female Under 8</td><td>Eleanor</td><td>Wu</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 8">
+                                <td>76</td>
+                                <td>Female Under 8</td><td>Jennifer (yuxian)</td><td>Wang</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1420</span></td>
+                            </tr>
+                        
+                            <tr data-division="Female Under 8">
+                                <td>77</td>
+                                <td>Female Under 8</td><td>Zariya</td><td>Mahajan</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1525</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>78</td>
+                                <td>Open Under 10</td><td>Joshua Kai- En</td><td>Huang</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1420</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>79</td>
+                                <td>Open Under 10</td><td>Huankai</td><td>Xu</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1766</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>80</td>
+                                <td>Open Under 10</td><td>Aiden J</td><td>Zhang</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>81</td>
+                                <td>Open Under 10</td><td>Quinn</td><td>Song</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1588</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>82</td>
+                                <td>Open Under 10</td><td>Lucas</td><td>Zhang</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1595</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>83</td>
+                                <td>Open Under 10</td><td>Noah</td><td>Wang</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1508</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>84</td>
+                                <td>Open Under 10</td><td>Attiligoda</td><td>Jayasinghe</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1453</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>85</td>
+                                <td>Open Under 10</td><td>David Ye Cheng</td><td>Liang</td><td>4325079</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>86</td>
+                                <td>Open Under 10</td><td>Asher</td><td>Kirschbaum</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1568</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>87</td>
+                                <td>Open Under 10</td><td>Geetham</td><td>Addagada</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1639</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>88</td>
+                                <td>Open Under 10</td><td>Jamie Shizhe</td><td>Wang</td><td>NZL</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>89</td>
+                                <td>Open Under 10</td><td>Kaisar</td><td>Batyrbekov</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1682</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>90</td>
+                                <td>Open Under 10</td><td>TARAN</td><td>NISHA RAJ</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1538</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>91</td>
+                                <td>Open Under 10</td><td>Xin</td><td>Lin</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1427</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>92</td>
+                                <td>Open Under 10</td><td>Zining</td><td>Jia</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1774</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>93</td>
+                                <td>Open Under 10</td><td>Leo</td><td>Lopatyuk</td><td>Guam</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1569</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>94</td>
+                                <td>Open Under 10</td><td>Leo</td><td>Kuncoro</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1917</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>95</td>
+                                <td>Open Under 10</td><td>Kaisar</td><td>Batyrbekov</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1682</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>96</td>
+                                <td>Open Under 10</td><td>RUOSHUI (RYAN)</td><td>WANG</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>97</td>
+                                <td>Open Under 10</td><td>RITHVIK</td><td>YENDLURI</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1693</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>98</td>
+                                <td>Open Under 10</td><td>Dharshan</td><td>Karthikeyan</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1544</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>99</td>
+                                <td>Open Under 10</td><td>Lucas</td><td>Parker</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1646</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>100</td>
+                                <td>Open Under 10</td><td>Azaan</td><td>bansal</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1592</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>101</td>
+                                <td>Open Under 10</td><td>TARAN</td><td>NISHA RAJ</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1538</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>102</td>
+                                <td>Open Under 10</td><td>Xin</td><td>Lin</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1427</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>103</td>
+                                <td>Open Under 10</td><td>Zining</td><td>Jia</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1774</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>104</td>
+                                <td>Open Under 10</td><td>leo</td><td>xie</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1666</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>105</td>
+                                <td>Open Under 10</td><td>Noam</td><td>Mori</td><td>New Caledonia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>106</td>
+                                <td>Open Under 10</td><td>Brett</td><td>Oakley</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1491</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>107</td>
+                                <td>Open Under 10</td><td>Jayden</td><td>Chen</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1459</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>108</td>
+                                <td>Open Under 10</td><td>Isaac</td><td>Chen</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>109</td>
+                                <td>Open Under 10</td><td>Harvey</td><td>Kuncoro</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1652</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>110</td>
+                                <td>Open Under 10</td><td>Ethan</td><td>Wu</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1683</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>111</td>
+                                <td>Open Under 10</td><td>SIJIA</td><td>CHEN</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>112</td>
+                                <td>Open Under 10</td><td>Quang Minh</td><td>Le</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1746</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>113</td>
+                                <td>Open Under 10</td><td>Joey</td><td>Su</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1871</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>114</td>
+                                <td>Open Under 10</td><td>Zane</td><td>Zhu</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1599</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>115</td>
+                                <td>Open Under 10</td><td>Joshua</td><td>Ren</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1443</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>116</td>
+                                <td>Open Under 10</td><td>Terrence</td><td>Li</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1893</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>117</td>
+                                <td>Open Under 10</td><td>Ayaansh</td><td>Vijay</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1544</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>118</td>
+                                <td>Open Under 10</td><td>Kiy</td><td>Kovalenko</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1543</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 10">
+                                <td>119</td>
+                                <td>Open Under 10</td><td>Richard</td><td>Li-Zeng</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">0</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>120</td>
+                                <td>Open Under 12</td><td>Zack</td><td>Wang</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>121</td>
+                                <td>Open Under 12</td><td>Sahar</td><td>Shirawala</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1637</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>122</td>
+                                <td>Open Under 12</td><td>Mason</td><td>Tay</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1765</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>123</td>
+                                <td>Open Under 12</td><td>Aiden</td><td>Fan</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1554</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>124</td>
+                                <td>Open Under 12</td><td>Lucas</td><td>Zhao</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1822</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>125</td>
+                                <td>Open Under 12</td><td>Carlos</td><td>GUO</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">0</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>126</td>
+                                <td>Open Under 12</td><td>Xinyao</td><td>Fan</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1670</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>127</td>
+                                <td>Open Under 12</td><td>Richard Jingjie</td><td>Liu</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1898</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>128</td>
+                                <td>Open Under 12</td><td>Sonny</td><td>Mantello</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1651</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>129</td>
+                                <td>Open Under 12</td><td>Martin</td><td>Zhou</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1730</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>130</td>
+                                <td>Open Under 12</td><td>Marlon</td><td>Chen</td><td>AUS</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1538</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>131</td>
+                                <td>Open Under 12</td><td>Patrick Di</td><td>Jiang</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1826</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>132</td>
+                                <td>Open Under 12</td><td>Jonah</td><td>Awad</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1706</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>133</td>
+                                <td>Open Under 12</td><td>Caleb</td><td>Ong</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1422</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>134</td>
+                                <td>Open Under 12</td><td>Nathan</td><td>He</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1773</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>135</td>
+                                <td>Open Under 12</td><td>Khushal</td><td>Lingineni</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">2020</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>136</td>
+                                <td>Open Under 12</td><td>Yan Tong</td><td>Zhou</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>137</td>
+                                <td>Open Under 12</td><td>James Marcus</td><td>Justo</td><td>Guam</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1960</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>138</td>
+                                <td>Open Under 12</td><td>Nathan</td><td>He</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1773</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>139</td>
+                                <td>Open Under 12</td><td>Khushal</td><td>Lingineni</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">2020</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>140</td>
+                                <td>Open Under 12</td><td>Yan Tong</td><td>Zhou</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>141</td>
+                                <td>Open Under 12</td><td>Caleb</td><td>Wang</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1649</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>142</td>
+                                <td>Open Under 12</td><td>William</td><td>Si</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1478</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>143</td>
+                                <td>Open Under 12</td><td>George</td><td>Song</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>144</td>
+                                <td>Open Under 12</td><td>Leo</td><td>Threlfall</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1599</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>145</td>
+                                <td>Open Under 12</td><td>Max</td><td>Chen</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>146</td>
+                                <td>Open Under 12</td><td>Dhruv</td><td>Bansal</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>147</td>
+                                <td>Open Under 12</td><td>Dhairya</td><td>Bansal</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>148</td>
+                                <td>Open Under 12</td><td>Winson</td><td>Yuan</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1711</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>149</td>
+                                <td>Open Under 12</td><td>Isaac</td><td>Godinho</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1798</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>150</td>
+                                <td>Open Under 12</td><td>Chenbi</td><td>Zang</td><td></td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>151</td>
+                                <td>Open Under 12</td><td>Peter</td><td>Kininmonth</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>152</td>
+                                <td>Open Under 12</td><td>Yuwei</td><td>Wang</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1653</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>153</td>
+                                <td>Open Under 12</td><td>Noah</td><td>Zi</td><td>NA</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>154</td>
+                                <td>Open Under 12</td><td>Zeqi</td><td>Xing</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1777</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>155</td>
+                                <td>Open Under 12</td><td>Ethan</td><td>Joseph</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1561</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>156</td>
+                                <td>Open Under 12</td><td>Alex</td><td>Zhu</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1628</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>157</td>
+                                <td>Open Under 12</td><td>Allen</td><td>Yang</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>158</td>
+                                <td>Open Under 12</td><td>Marcus</td><td>So</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>159</td>
+                                <td>Open Under 12</td><td>John</td><td>Shu</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1602</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>160</td>
+                                <td>Open Under 12</td><td>Armaan</td><td>Nand</td><td>Vanuatu</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 12">
+                                <td>161</td>
+                                <td>Open Under 12</td><td>Martin</td><td>Xu</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>162</td>
+                                <td>Open Under 14</td><td>Avaneesh</td><td>Pai</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1731</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>163</td>
+                                <td>Open Under 14</td><td>Yuan</td><td>Huang</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">2014</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>164</td>
+                                <td>Open Under 14</td><td>Joshua</td><td>Barnes</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1740</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>165</td>
+                                <td>Open Under 14</td><td>Joshua</td><td>Ong</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1593</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>166</td>
+                                <td>Open Under 14</td><td>Tarush</td><td>Jindal</td><td>Australia</td>
+                                <td><span class="badge bg-primary fide-title">CM</span></td>
+                                <td><span class="fide-rating">1973</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>167</td>
+                                <td>Open Under 14</td><td>Eamon</td><td>Harris</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1702</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>168</td>
+                                <td>Open Under 14</td><td>Sebastian</td><td>Staines</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1420</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>169</td>
+                                <td>Open Under 14</td><td>Aiden</td><td>Maleki</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1894</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>170</td>
+                                <td>Open Under 14</td><td>Erkut</td><td>Tanin</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1590</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>171</td>
+                                <td>Open Under 14</td><td>Buthsara</td><td>Hettiarachchi</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1920</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>172</td>
+                                <td>Open Under 14</td><td>Nikolaj</td><td>Brdaric</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1584</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>173</td>
+                                <td>Open Under 14</td><td>Phuc Bao Tam</td><td>Nguyen</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1709</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>174</td>
+                                <td>Open Under 14</td><td>Lionel</td><td>Vaurasi</td><td>Fiji</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1520</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>175</td>
+                                <td>Open Under 14</td><td>Témoé</td><td>Bellier Pontais</td><td>New Caledonia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>176</td>
+                                <td>Open Under 14</td><td>Sebastian</td><td>Staines</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1420</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>177</td>
+                                <td>Open Under 14</td><td>Elvis</td><td>Wu</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1602</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>178</td>
+                                <td>Open Under 14</td><td>Jason</td><td>Zhang</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1535</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>179</td>
+                                <td>Open Under 14</td><td>Kelvin (Zi Yao)</td><td>Wang</td><td>NZL</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>180</td>
+                                <td>Open Under 14</td><td>Immanuel</td><td>Collins</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>181</td>
+                                <td>Open Under 14</td><td>Justin</td><td>Xia</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">2090</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>182</td>
+                                <td>Open Under 14</td><td>Jasper</td><td>Cunninghàm</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>183</td>
+                                <td>Open Under 14</td><td>Wilbur</td><td>Hong</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1840</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>184</td>
+                                <td>Open Under 14</td><td>Ethan</td><td>Zhang</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>185</td>
+                                <td>Open Under 14</td><td>Joshua</td><td>Liu</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1840</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>186</td>
+                                <td>Open Under 14</td><td>Donald</td><td>Tonutonu</td><td>Tonga</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>187</td>
+                                <td>Open Under 14</td><td>Bryce</td><td>Chen</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1536</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>188</td>
+                                <td>Open Under 14</td><td>Haoqian William</td><td>Liu</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1809</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>189</td>
+                                <td>Open Under 14</td><td>Alvis</td><td>Gan</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1485</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>190</td>
+                                <td>Open Under 14</td><td>Elizabeth</td><td>Williams</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1531</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>191</td>
+                                <td>Open Under 14</td><td>Ishaan</td><td>Naan</td><td>Vanuatu</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>192</td>
+                                <td>Open Under 14</td><td>William</td><td>Searle</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1668</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>193</td>
+                                <td>Open Under 14</td><td>Anh Kiet</td><td>Nguyen</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1986</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 14">
+                                <td>194</td>
+                                <td>Open Under 14</td><td>Dhruthin Reddy</td><td>Annapureddy</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1536</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>195</td>
+                                <td>Open Under 16</td><td>Cunmeng</td><td>Wang</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1992</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>196</td>
+                                <td>Open Under 16</td><td>Vihaan</td><td>Anup Kumar</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1937</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>197</td>
+                                <td>Open Under 16</td><td>Alexander</td><td>Horlin Smith</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1888</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>198</td>
+                                <td>Open Under 16</td><td>Dion A</td><td>Wilson</td><td>NZL</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1980</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>199</td>
+                                <td>Open Under 16</td><td>Mike</td><td>Liu</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1624</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>200</td>
+                                <td>Open Under 16</td><td>Jeeva</td><td>Praveen</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1965</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>201</td>
+                                <td>Open Under 16</td><td>Tass</td><td>Coracas</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">2004</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>202</td>
+                                <td>Open Under 16</td><td>Kyan</td><td>Choi</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1592</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>203</td>
+                                <td>Open Under 16</td><td>Rossi</td><td>Barnes</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1644</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>204</td>
+                                <td>Open Under 16</td><td>Ted</td><td>Power</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">2062</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>205</td>
+                                <td>Open Under 16</td><td>Ben</td><td>Gordon</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1847</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>206</td>
+                                <td>Open Under 16</td><td>Novak</td><td>Nguyen</td><td>New Caledonia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>207</td>
+                                <td>Open Under 16</td><td>Ted</td><td>Power</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">2062</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>208</td>
+                                <td>Open Under 16</td><td>Ben</td><td>Gordon</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1847</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>209</td>
+                                <td>Open Under 16</td><td>Gabriel</td><td>Harding</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1785</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>210</td>
+                                <td>Open Under 16</td><td>Tau'ataina</td><td>Satini</td><td>Tonga</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>211</td>
+                                <td>Open Under 16</td><td>Melkum</td><td>Jayjay</td><td>Vanuatu</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>212</td>
+                                <td>Open Under 16</td><td>Savin</td><td>Peramunetilleke</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1897</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>213</td>
+                                <td>Open Under 16</td><td>Daniil</td><td>Yelkhovsky</td><td>australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1931</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>214</td>
+                                <td>Open Under 16</td><td>Yang-Hian</td><td>Phang</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1577</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>215</td>
+                                <td>Open Under 16</td><td>Oscar</td><td>Kirby</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1856</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>216</td>
+                                <td>Open Under 16</td><td>Timothy</td><td>Lee</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1685</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>217</td>
+                                <td>Open Under 16</td><td>Levi</td><td>Phun</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>218</td>
+                                <td>Open Under 16</td><td>Ernest</td><td>Bashirov</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1603</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>219</td>
+                                <td>Open Under 16</td><td>Zev</td><td>Geffen</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1538</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>220</td>
+                                <td>Open Under 16</td><td>Isaac</td><td>Liu</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1891</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>221</td>
+                                <td>Open Under 16</td><td>Matthew</td><td>Lin</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>222</td>
+                                <td>Open Under 16</td><td>Palanga</td><td>Maungongo</td><td>Papua New Guinea</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 16">
+                                <td>223</td>
+                                <td>Open Under 16</td><td>Minchen</td><td>Yang</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1649</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>224</td>
+                                <td>Open Under 18</td><td>Joel</td><td>Leong</td><td>Australia</td>
+                                <td><span class="badge bg-primary fide-title">CM</span></td>
+                                <td><span class="fide-rating">1933</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>225</td>
+                                <td>Open Under 18</td><td>Rui Gen</td><td>Teh</td><td>Australia</td>
+                                <td><span class="badge bg-primary fide-title">FM</span></td>
+                                <td><span class="fide-rating">2150</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>226</td>
+                                <td>Open Under 18</td><td>Benny</td><td>Chan</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1815</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>227</td>
+                                <td>Open Under 18</td><td>Sam</td><td>Smith</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1591</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>228</td>
+                                <td>Open Under 18</td><td>Zhi Yu (Paul)</td><td>He</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1961</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>229</td>
+                                <td>Open Under 18</td><td>Alvin</td><td>Shen</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1587</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>230</td>
+                                <td>Open Under 18</td><td>Tedric</td><td>Li</td><td>Australia</td>
+                                <td><span class="badge bg-primary fide-title">CM</span></td>
+                                <td><span class="fide-rating">2203</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>231</td>
+                                <td>Open Under 18</td><td>William</td><td>Carrigan</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1625</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>232</td>
+                                <td>Open Under 18</td><td>Leo</td><td>Kalina</td><td>Australia</td>
+                                <td><span class="badge bg-primary fide-title">CM</span></td>
+                                <td><span class="fide-rating">2103</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>233</td>
+                                <td>Open Under 18</td><td>Xavier</td><td>Hong</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1907</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>234</td>
+                                <td>Open Under 18</td><td>Praveer</td><td>Singh</td><td>Fiji</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>235</td>
+                                <td>Open Under 18</td><td>Arden</td><td>Kaemo</td><td>New Caledonia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1654</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>236</td>
+                                <td>Open Under 18</td><td>Alex</td><td>Devin</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1871</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>237</td>
+                                <td>Open Under 18</td><td>Leo</td><td>Kalina</td><td>Australia</td>
+                                <td><span class="badge bg-primary fide-title">CM</span></td>
+                                <td><span class="fide-rating">2103</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>238</td>
+                                <td>Open Under 18</td><td>Xavier</td><td>Hong</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1907</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>239</td>
+                                <td>Open Under 18</td><td>Ethan</td><td>Chang</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">2071</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>240</td>
+                                <td>Open Under 18</td><td>Daniel</td><td>Wang</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>241</td>
+                                <td>Open Under 18</td><td>Neil</td><td>Fu</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1843</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>242</td>
+                                <td>Open Under 18</td><td>Charles</td><td>Fu</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1818</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>243</td>
+                                <td>Open Under 18</td><td>Andrew</td><td>He</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1914</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>244</td>
+                                <td>Open Under 18</td><td>Randheer</td><td>Thogata</td><td>Australia</td>
+                                <td><span class="badge bg-primary fide-title">FM</span></td>
+                                <td><span class="fide-rating">2206</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>245</td>
+                                <td>Open Under 18</td><td>Sean</td><td>Su</td><td>Vanuatu</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1693</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>246</td>
+                                <td>Open Under 18</td><td>Eric</td><td>Liu</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">2008</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>247</td>
+                                <td>Open Under 18</td><td>Ryan</td><td>Liaw</td><td>Australia</td>
+                                <td><span class="badge bg-primary fide-title">CM</span></td>
+                                <td><span class="fide-rating">2066</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>248</td>
+                                <td>Open Under 18</td><td>Austin</td><td>Chen</td><td>Australia</td>
+                                <td><span class="badge bg-primary fide-title">CM</span></td>
+                                <td><span class="fide-rating">1844</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>249</td>
+                                <td>Open Under 18</td><td>Jean</td><td>Rusakov</td><td>Australia</td>
+                                <td><span class="badge bg-primary fide-title">CM</span></td>
+                                <td><span class="fide-rating">2016</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>250</td>
+                                <td>Open Under 18</td><td>Harrison</td><td>Bennett</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1836</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>251</td>
+                                <td>Open Under 18</td><td>Nachiket</td><td>Ramprasad</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1540</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>252</td>
+                                <td>Open Under 18</td><td>Daqi</td><td>Mao</td><td>New Zealand</td>
+                                <td><span class="badge bg-primary fide-title">FM</span></td>
+                                <td><span class="fide-rating">2217</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>253</td>
+                                <td>Open Under 18</td><td>Rayden</td><td>Tiong</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1495</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 18">
+                                <td>254</td>
+                                <td>Open Under 18</td><td>Randev</td><td>Singh</td><td>Fiji</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 20">
+                                <td>255</td>
+                                <td>Open Under 20</td><td>Benjamin</td><td>Leong</td><td>Australia</td>
+                                <td><span class="badge bg-primary fide-title">CM</span></td>
+                                <td><span class="fide-rating">2106</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 20">
+                                <td>256</td>
+                                <td>Open Under 20</td><td>Markis</td><td>Tew</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 20">
+                                <td>257</td>
+                                <td>Open Under 20</td><td>Mikyle</td><td>Khurram</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1812</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 20">
+                                <td>258</td>
+                                <td>Open Under 20</td><td>James</td><td>Hartley</td><td>Australia</td>
+                                <td><span class="badge bg-primary fide-title">CM</span></td>
+                                <td><span class="fide-rating">1963</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 20">
+                                <td>259</td>
+                                <td>Open Under 20</td><td>Yifei</td><td>Hu</td><td>Australia</td>
+                                <td><span class="badge bg-primary fide-title">FM</span></td>
+                                <td><span class="fide-rating">2151</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 20">
+                                <td>260</td>
+                                <td>Open Under 20</td><td>Ren</td><td>Min</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">2023</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 20">
+                                <td>261</td>
+                                <td>Open Under 20</td><td>Rudr</td><td>Prasad</td><td>Fiji</td>
+                                <td><span class="badge bg-primary fide-title">CM</span></td>
+                                <td><span class="fide-rating">1806</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 20">
+                                <td>262</td>
+                                <td>Open Under 20</td><td>Wiseman</td><td>Demauna</td><td>Nauru</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 20">
+                                <td>263</td>
+                                <td>Open Under 20</td><td>Ren</td><td>Min</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">2023</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 20">
+                                <td>264</td>
+                                <td>Open Under 20</td><td>Maxime</td><td>Bouchard</td><td>New Caledonia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1711</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 20">
+                                <td>265</td>
+                                <td>Open Under 20</td><td>Atash</td><td>Iddon</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">2028</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 20">
+                                <td>266</td>
+                                <td>Open Under 20</td><td>Neo</td><td>Jigando</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1706</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 20">
+                                <td>267</td>
+                                <td>Open Under 20</td><td>Alex</td><td>Field</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 20">
+                                <td>268</td>
+                                <td>Open Under 20</td><td>Harvey</td><td>Zhu</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">2208</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 20">
+                                <td>269</td>
+                                <td>Open Under 20</td><td>Ethan</td><td>Retnaraja</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1923</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 20">
+                                <td>270</td>
+                                <td>Open Under 20</td><td>Shaurya</td><td>Jain</td><td>Ausralia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 20">
+                                <td>271</td>
+                                <td>Open Under 20</td><td>Jesse</td><td>Zafirakos</td><td>Australia</td>
+                                <td><span class="badge bg-primary fide-title">CM</span></td>
+                                <td><span class="fide-rating">2121</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 20">
+                                <td>272</td>
+                                <td>Open Under 20</td><td>Ryder</td><td>Testolin</td><td>Ausralia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 20">
+                                <td>273</td>
+                                <td>Open Under 20</td><td>Jayden</td><td>Ooi</td><td>Australia</td>
+                                <td><span class="badge bg-primary fide-title">FM</span></td>
+                                <td><span class="fide-rating">2175</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 8">
+                                <td>274</td>
+                                <td>Open Under 8</td><td>Preston</td><td>Liu</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1524</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 8">
+                                <td>275</td>
+                                <td>Open Under 8</td><td>Ryan</td><td>Hou</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 8">
+                                <td>276</td>
+                                <td>Open Under 8</td><td>Alden</td><td>Shen</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 8">
+                                <td>277</td>
+                                <td>Open Under 8</td><td>Leonard</td><td>Smerdon</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 8">
+                                <td>278</td>
+                                <td>Open Under 8</td><td>Felix</td><td>Smerdon</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 8">
+                                <td>279</td>
+                                <td>Open Under 8</td><td>Isaac</td><td>Ong</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 8">
+                                <td>280</td>
+                                <td>Open Under 8</td><td>Aidan</td><td>Batyrbekov</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1613</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 8">
+                                <td>281</td>
+                                <td>Open Under 8</td><td>Ryan</td><td>Subhash</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 8">
+                                <td>282</td>
+                                <td>Open Under 8</td><td>Kevin</td><td>Chen</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 8">
+                                <td>283</td>
+                                <td>Open Under 8</td><td>Aidan</td><td>Batyrbekov</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1613</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 8">
+                                <td>284</td>
+                                <td>Open Under 8</td><td>Zachary</td><td>Wong</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 8">
+                                <td>285</td>
+                                <td>Open Under 8</td><td>Neev</td><td>Jyothi Nikhil</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1462</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 8">
+                                <td>286</td>
+                                <td>Open Under 8</td><td>Ryder</td><td>Chen</td><td>NZ</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 8">
+                                <td>287</td>
+                                <td>Open Under 8</td><td>Nicholas Yuileng</td><td>Chen</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1605</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 8">
+                                <td>288</td>
+                                <td>Open Under 8</td><td>Emmanuel</td><td>Lakshman</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1496</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 8">
+                                <td>289</td>
+                                <td>Open Under 8</td><td>Brian</td><td>Yang</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1611</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 8">
+                                <td>290</td>
+                                <td>Open Under 8</td><td>Francis</td><td>Fu</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="fide-rating">1528</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 8">
+                                <td>291</td>
+                                <td>Open Under 8</td><td>Arthur</td><td>Zhou</td><td>New Zealand</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 8">
+                                <td>292</td>
+                                <td>Open Under 8</td><td>Richard</td><td>Zang</td><td>Australia</td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                            <tr data-division="Open Under 8">
+                                <td>293</td>
+                                <td>Open Under 8</td><td>Ian</td><td>CHEN</td><td></td>
+                                <td><span class="text-muted">-</span></td>
+                                <td><span class="text-muted">-</span></td>
+                            </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+            <div id="noResults" class="no-results" style="display: none;">
+                <i class="bi bi-inbox"></i>
+                <h4>No participants found</h4>
+                <p>Try selecting a different division</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const divisionFilter = document.getElementById('divisionFilter');
+        const tableBody = document.getElementById('tableBody');
+        const rows = Array.from(tableBody.querySelectorAll('tr'));
+        const recordCount = document.getElementById('recordCount');
+        const noResults = document.getElementById('noResults');
+        const tableContainer = document.getElementById('tableContainer');
+
+        function filterTable() {
+            const selectedDivision = divisionFilter.value;
+            let visibleCount = 0;
+
+            rows.forEach((row, index) => {
+                const rowDivision = row.getAttribute('data-division');
+                if (!selectedDivision || rowDivision === selectedDivision) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            recordCount.textContent = visibleCount;
+
+            if (visibleCount === 0) {
+                tableContainer.style.display = 'none';
+                noResults.style.display = 'block';
+            } else {
+                tableContainer.style.display = 'block';
+                noResults.style.display = 'none';
+            }
+        }
+
+        divisionFilter.addEventListener('change', filterTable);
+    </script>
+</body>
+</html>
