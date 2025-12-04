@@ -27,6 +27,38 @@ function getFideCode(country) {
   return countryToFideCode[normalized] || countryToFideCode[normalized.toLowerCase()] || null;
 }
 
+// Country to flag emoji mapping
+const countryToFlag = {
+  'Australia': '🇦🇺',
+  'Austrlaia': '🇦🇺',
+  'australia': '🇦🇺',
+  'Ausralia': '🇦🇺',
+  'AUS': '🇦🇺',
+  'New Zealand': '🇳🇿',
+  'NZL': '🇳🇿',
+  'Guam': '🇬🇺',
+  'GUM': '🇬🇺',
+  'Nauru': '🇳🇷',
+  'NRU': '🇳🇷',
+  'Fiji': '🇫🇯',
+  'FIJ': '🇫🇯',
+  'New Caledonia': '🇳🇨',
+  'NCL': '🇳🇨',
+  'Vanuatu': '🇻🇺',
+  'VAN': '🇻🇺',
+  'Tonga': '🇹🇴',
+  'TGA': '🇹🇴',
+  'Papua New Guinea': '🇵🇬',
+  'PNG': '🇵🇬'
+};
+
+// Helper function to get flag emoji from country
+function getCountryFlag(country) {
+  if (!country) return '';
+  const normalized = country.trim();
+  return countryToFlag[normalized] || countryToFlag[normalized.toLowerCase()] || '';
+}
+
 // Helper function to parse FIDE HTML response
 function parseFideResponse(html, targetFideCode) {
   const results = [];
@@ -447,33 +479,44 @@ const html = `<!DOCTYPE html>
             margin-bottom: 20px;
             opacity: 0.3;
         }
-        .data-source-notice {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-left: 4px solid #667eea;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        .info-icon {
+            color: #667eea;
+            cursor: pointer;
+            margin-left: 8px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
         }
-        .data-source-notice p {
-            margin-bottom: 10px;
-            color: #495057;
+        .info-icon:hover {
+            color: #764ba2;
+            transform: scale(1.2);
         }
-        .data-source-notice a {
+        .country-flag {
+            font-size: 1.3rem;
+            margin-right: 6px;
+            vertical-align: middle;
+        }
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px 15px 0 0;
+            border: none;
+        }
+        .modal-header .btn-close {
+            filter: invert(1);
+        }
+        .modal-body a {
             color: #667eea;
             text-decoration: none;
             font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
         }
-        .data-source-notice a:hover {
+        .modal-body a:hover {
             color: #764ba2;
             text-decoration: underline;
-        }
-        .data-source-notice i {
-            font-size: 1.2rem;
         }
         @media (max-width: 768px) {
             .header-card, .filter-section, .table-card {
@@ -494,18 +537,48 @@ const html = `<!DOCTYPE html>
     <div class="container">
         <div class="header-card">
             <h1><i class="bi bi-trophy-fill"></i> Oceania Zonal Youth 2025</h1>
-            <p class="text-muted mb-0">All paid entries as of the 3rd of Dec</p>
+            <p class="text-muted mb-0">
+                All paid entries as of the 3rd of Dec
+                <i class="bi bi-info-circle info-icon" data-bs-toggle="modal" data-bs-target="#dataSourceModal" title="About this data"></i>
+            </p>
         </div>
 
-        <div class="data-source-notice">
-            <p><strong><i class="bi bi-info-circle"></i> Data Source:</strong></p>
-            <p>This data is extracted from the official Google Sheets source. For the most up-to-date real-time list, please visit:</p>
-            <p>
-                <a href="https://docs.google.com/spreadsheets/d/1kbWX5j6PMq-WFI7mjdYnup_J3YY5xkfrTBmQZuqMpWU/edit?gid=1450537835#gid=1450537835" target="_blank" rel="noopener noreferrer">
-                    <i class="bi bi-box-arrow-up-right"></i>
-                    View Real-time List on Google Sheets
-                </a>
-            </p>
+        <!-- Data Source Modal -->
+        <div class="modal fade" id="dataSourceModal" tabindex="-1" aria-labelledby="dataSourceModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="dataSourceModalLabel">
+                            <i class="bi bi-info-circle"></i> Data Source Information
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>About this data:</strong></p>
+                        <p>This data is extracted from the official Google Sheets source. For the most up-to-date real-time list, please visit:</p>
+                        <p>
+                            <a href="https://docs.google.com/spreadsheets/d/1kbWX5j6PMq-WFI7mjdYnup_J3YY5xkfrTBmQZuqMpWU/edit?gid=1450537835#gid=1450537835" target="_blank" rel="noopener noreferrer">
+                                <i class="bi bi-box-arrow-up-right"></i>
+                                View Real-time List on Google Sheets
+                            </a>
+                        </p>
+                        <hr>
+                        <p><strong>Official Event Website:</strong></p>
+                        <p>
+                            <a href="https://sites.google.com/view/oceaniayouthzonal2025/home" target="_blank" rel="noopener noreferrer">
+                                <i class="bi bi-globe"></i>
+                                2025 Oceania Youth Chess Championship
+                            </a>
+                        </p>
+                        <hr>
+                        <p><strong>FIDE Ratings:</strong></p>
+                        <p>FIDE ratings are automatically fetched from the official FIDE ratings database. Ratings are matched by player name and country to ensure accuracy.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="filter-section">
@@ -550,9 +623,14 @@ const html = `<!DOCTYPE html>
                             <tr data-division="${row.Division || ''}" data-rating="${row.FIDERating || '0'}">
                                 <td>${index + 1}</td>
                                 ${header.map(h => {
-                                  // Special handling for Name column to show FIDE ID link
+                                  // Special handling for Surname column to show FIDE ID link
                                   if (h === 'Surname' && row.FIDEId) {
                                     return `<td>${row[h] || ''} ${fideIdDisplay}</td>`;
+                                  }
+                                  // Special handling for Country column to show flag
+                                  if (h === 'Country') {
+                                    const flag = getCountryFlag(row[h] || '');
+                                    return `<td>${flag ? `<span class="country-flag">${flag}</span>` : ''}${row[h] || ''}</td>`;
                                   }
                                   return `<td>${row[h] || ''}</td>`;
                                 }).join('')}
