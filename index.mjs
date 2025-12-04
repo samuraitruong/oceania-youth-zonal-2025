@@ -5,6 +5,7 @@ const countryToFideCode = {
   'Australia': 'AUS',
   'Austrlaia': 'AUS', // typo in data
   'australia': 'AUS',
+  'Ausralia': 'AUS',
   'AUS': 'AUS',
   'New Zealand': 'NZL',
   'NZL': 'NZL',
