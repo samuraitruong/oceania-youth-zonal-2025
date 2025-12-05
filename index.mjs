@@ -59,6 +59,15 @@ function getCountryFlag(country) {
   return countryToFlag[normalized] || countryToFlag[normalized.toLowerCase()] || '';
 }
 
+// Helper function to deduplicate titles (e.g., "CM CM" -> "CM", "WCM WCM" -> "WCM")
+function deduplicateTitle(title) {
+  if (!title) return '';
+  // Split by whitespace and get unique values, then join back
+  const titleParts = title.split(/\s+/).filter(Boolean);
+  const uniqueParts = [...new Set(titleParts)];
+  return uniqueParts.join(' ');
+}
+
 // Helper function to parse FIDE HTML response
 function parseFideResponse(html, targetFideCode) {
   const results = [];
@@ -114,7 +123,7 @@ function parseFideResponse(html, targetFideCode) {
     
     // Extract Title
     const titleMatch = row.match(/<td[^>]*data-label="title"[^>]*>([^<]*)<\/td>/);
-    const title = titleMatch ? titleMatch[1].trim() : '';
+    const title = deduplicateTitle(titleMatch ? titleMatch[1].trim() : '');
     
     // Extract Standard Rating (first Rtg column)
     let stdRating = '';
@@ -258,6 +267,7 @@ let dataList = dataRows.map(row => {
   obj.FIDETitle = '';
   obj.FIDERating = '';
   obj.FIDEId = '';
+  obj.FIDEName = '';
   return obj;
 });
 
@@ -342,10 +352,19 @@ async function processPlayer(player, index) {
   // Check cache first (only if enabled)
   if (ENABLED_CACHE && cache[cacheKey]) {
     fideData = cache[cacheKey];
+    // Deduplicate title if it exists (fixes old cache entries with duplicates)
+    if (fideData && fideData.title) {
+      fideData.title = deduplicateTitle(fideData.title);
+    }
     cached++;
   } else {
     // Fetch from FIDE
     fideData = await fetchFideRating(surname, firstName, country);
+    
+    // Deduplicate title if it exists (before saving to cache)
+    if (fideData && fideData.title) {
+      fideData.title = deduplicateTitle(fideData.title);
+    }
     
     // Save to cache (only if enabled, even if null, to avoid refetching)
     if (ENABLED_CACHE) {
@@ -357,6 +376,7 @@ async function processPlayer(player, index) {
     player.FIDETitle = fideData.title || '';
     player.FIDERating = fideData.stdRating || '';
     player.FIDEId = fideData.fideId || '';
+    player.FIDEName = fideData.name || '';
     found++;
   }
   
@@ -675,26 +695,33 @@ const html = `<!DOCTYPE html>
                     <thead>
                         <tr>
                             <th>#</th>
-                            ${header.map(h => `<th class="sortable" data-sort="${h}">${h}</th>`).join('')}
+                            ${header.filter(h => h !== 'First Name' && h !== 'Surname').map(h => `<th class="sortable" data-sort="${h}">${h}</th>`).join('')}
+                            <th class="sortable" data-sort="Name">Name</th>
                             <th class="sortable" data-sort="FIDETitle">FIDE Title</th>
                             <th class="sortable" data-sort="FIDERating">FIDE Rating</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
                         ${dataList.map((row, index) => {
-                          // Create FIDE ID link if available
-                          const fideIdDisplay = row.FIDEId 
-                            ? `<a href="https://ratings.fide.com/profile/${row.FIDEId}" target="_blank" rel="noopener noreferrer" class="fide-link" title="View FIDE Profile"><i class="bi bi-box-arrow-up-right"></i> ${row.FIDEId}</a>`
-                            : '<span class="text-muted">-</span>';
+                          // Create name display: use FIDE name if available, otherwise "Surname, First Name"
+                          let displayName = '';
+                          if (row.FIDEName) {
+                            displayName = row.FIDEName;
+                          } else {
+                            const surname = row.Surname || '';
+                            const firstName = row['First Name'] || '';
+                            displayName = surname && firstName ? `${surname}, ${firstName}` : (surname || firstName || '');
+                          }
+                          
+                          // Make name a link to FIDE profile if FIDE ID exists
+                          const nameDisplay = row.FIDEId
+                            ? `<a href="https://ratings.fide.com/profile/${row.FIDEId}" target="_blank" rel="noopener noreferrer" class="fide-link" title="View FIDE Profile">${displayName}</a>`
+                            : displayName;
                           
                           return `
                             <tr data-division="${row.Division || ''}" data-rating="${row.FIDERating || '0'}">
                                 <td>${index + 1}</td>
-                                ${header.map(h => {
-                                  // Special handling for Surname column to show FIDE ID link
-                                  if (h === 'Surname' && row.FIDEId) {
-                                    return `<td>${row[h] || ''} ${fideIdDisplay}</td>`;
-                                  }
+                                ${header.filter(h => h !== 'First Name' && h !== 'Surname').map(h => {
                                   // Special handling for Country column to show flag
                                   if (h === 'Country') {
                                     const flag = getCountryFlag(row[h] || '');
@@ -702,6 +729,7 @@ const html = `<!DOCTYPE html>
                                   }
                                   return `<td>${row[h] || ''}</td>`;
                                 }).join('')}
+                                <td data-sort-value="${displayName.toLowerCase()}">${nameDisplay}</td>
                                 <td>${row.FIDETitle ? `<span class="badge bg-primary fide-title">${row.FIDETitle}</span>` : '<span class="text-muted">-</span>'}</td>
                                 <td data-sort-value="${row.FIDERating || '0'}">${row.FIDERating ? `<span class="fide-rating">${row.FIDERating}</span>` : '<span class="text-muted">-</span>'}</td>
                             </tr>
@@ -782,25 +810,22 @@ const html = `<!DOCTYPE html>
             rows.sort((a, b) => {
                 let aValue, bValue;
                 
+                // Get cell value based on column index
+                const columnIndex = Array.from(document.querySelectorAll('th')).findIndex(th => th.getAttribute('data-sort') === column);
+                if (columnIndex === -1) return 0;
+                
+                const aCell = a.querySelectorAll('td')[columnIndex];
+                const bCell = b.querySelectorAll('td')[columnIndex];
+                
                 if (column === 'FIDERating') {
-                    // Sort by numeric rating value
-                    aValue = parseInt(a.querySelector('td[data-sort-value]')?.getAttribute('data-sort-value') || '0');
-                    bValue = parseInt(b.querySelector('td[data-sort-value]')?.getAttribute('data-sort-value') || '0');
+                    // Sort by numeric rating value using data-sort-value attribute
+                    aValue = parseInt(aCell?.getAttribute('data-sort-value') || '0');
+                    bValue = parseInt(bCell?.getAttribute('data-sort-value') || '0');
+                    return direction === 'asc' ? aValue - bValue : bValue - aValue;
                 } else {
-                    // Get cell value based on column index
-                    const columnIndex = Array.from(document.querySelectorAll('th')).findIndex(th => th.getAttribute('data-sort') === column);
-                    if (columnIndex === -1) return 0;
-                    
-                    const aCell = a.querySelectorAll('td')[columnIndex];
-                    const bCell = b.querySelectorAll('td')[columnIndex];
-                    
+                    // String comparison for other columns
                     aValue = aCell ? (aCell.textContent || '').trim().toLowerCase() : '';
                     bValue = bCell ? (bCell.textContent || '').trim().toLowerCase() : '';
-                }
-                
-                // Handle numeric comparison for ratings
-                if (column === 'FIDERating') {
-                    return direction === 'asc' ? aValue - bValue : bValue - aValue;
                 }
                 
                 // String comparison
