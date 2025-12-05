@@ -193,8 +193,52 @@ const isMainModule = !process.argv[1] || process.argv[1] === currentFile || proc
 
 // Only run main execution if this is the main module (not imported)
 if (isMainModule) {
-// Read the CSV file from www folder
-const csvContent = fs.readFileSync('www/data.csv', 'utf-8');
+// Wrap main execution in async function to support await
+(async () => {
+// Google Sheets configuration
+const GOOGLE_SHEETS_ID = '1kbWX5j6PMq-WFI7mjdYnup_J3YY5xkfrTBmQZuqMpWU';
+const GOOGLE_SHEETS_GID = '1450537835';
+const GOOGLE_SHEETS_CSV_URL = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEETS_ID}/export?format=csv&gid=${GOOGLE_SHEETS_GID}`;
+
+// Function to fetch CSV from Google Sheets
+async function fetchCsvFromGoogleSheets() {
+  try {
+    console.log('📥 Fetching data from Google Sheets...');
+    const response = await fetch(GOOGLE_SHEETS_CSV_URL, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+      }
+    });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const csvContent = await response.text();
+    console.log('✅ Successfully fetched data from Google Sheets');
+    
+    // Save to data_live.csv
+    fs.writeFileSync('www/data_live.csv', csvContent, 'utf-8');
+    console.log('💾 Saved live data to www/data_live.csv');
+    
+    return csvContent;
+  } catch (error) {
+    console.error('❌ Error fetching from Google Sheets:', error.message);
+    console.log('📁 Falling back to local CSV file...');
+    
+    // Fallback to local file
+    if (fs.existsSync('www/data.csv')) {
+      const csvContent = fs.readFileSync('www/data.csv', 'utf-8');
+      console.log('✅ Using local CSV file as fallback');
+      return csvContent;
+    } else {
+      throw new Error('Could not fetch from Google Sheets and local CSV file not found');
+    }
+  }
+}
+
+// Fetch CSV content (async)
+const csvContent = await fetchCsvFromGoogleSheets();
 const lines = csvContent.split('\n').filter(line => line.trim() !== '');
 
 // Skip first line, get header from second line
@@ -802,6 +846,10 @@ fs.writeFileSync('www/index.html', html, 'utf-8');
 console.log('✅ HTML file generated successfully: www/index.html');
 console.log(`📊 Total records: ${dataList.length}`);
 console.log(`🏆 Divisions: ${divisions.length} unique divisions`);
+})().catch(error => {
+  console.error('❌ Fatal error:', error);
+  process.exit(1);
+});
 }
 
 // Export functions for use in other modules (must be at top level)
