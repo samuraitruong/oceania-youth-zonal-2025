@@ -217,6 +217,30 @@ let dataList = dataRows.map(row => {
   return obj;
 });
 
+// Remove duplicate entries based on Division, First Name, Surname, and Country
+const seenEntries = new Set();
+const uniqueDataList = [];
+let duplicateCount = 0;
+
+dataList.forEach((item, index) => {
+  // Create a unique key from Division, First Name, Surname, and Country
+  const key = `${item.Division || ''}|${item['First Name'] || ''}|${item.Surname || ''}|${item.Country || ''}`.toLowerCase();
+  
+  if (!seenEntries.has(key)) {
+    seenEntries.add(key);
+    uniqueDataList.push(item);
+  } else {
+    duplicateCount++;
+    console.log(`⚠️  Duplicate entry removed: ${item['First Name']} ${item.Surname} (${item.Division})`);
+  }
+});
+
+dataList = uniqueDataList;
+
+if (duplicateCount > 0) {
+  console.log(`✅ Removed ${duplicateCount} duplicate entry/entries`);
+}
+
 // Get unique divisions
 const divisions = [...new Set(dataList.map(item => item.Division).filter(Boolean))].sort();
 
