@@ -1,4 +1,4 @@
-All paid entries as of the 3rd of Dec,,,
+All paid entries as of the 7th of Dec,,,
 Division,First Name,Surname,Country
 Female Under 10,Sarah,Zuo,Australia
 Female Under 10,Kaylin,Zhang,Australia
@@ -9,8 +9,9 @@ Female Under 10,Bella,Xia,Australia
 Female Under 10,JAHNAVI,MONDAL,Australia
 Female Under 10,Clarissa,Liu,Australia
 Female Under 10,Guangzhao (allison),Zhou,New Zealand
-Female Under 10,Joanna,CHEN,
+Female Under 10,Joanna,CHEN,Australia
 Female Under 10,Bella,Xia,Australia
+Female Under 10,Jo,Gao,Australia
 Female Under 10,Sannah,Bhatia,Australia
 Female Under 12,Emma,Zhou,Australia
 Female Under 12,Yuanyi ( Rebecca),Zhao,New Zealand
@@ -24,6 +25,8 @@ Female Under 12,Charlotte,Chen,Australia
 Female Under 12,Yaroslav,Koulanov,New Zealand
 Female Under 12,Hamsini,Dudipalli,Australia
 Female Under 12,Olivia,Chu,Australia
+Female Under 12,xintong,Zhang,Australia 
+Female Under 12,Chloe,Wang,Australia
 Female Under 12,Maria Rose,Rauiti,Nauru
 Female Under 14,Vidushi,Dissanayake,Australia
 Female Under 14,Baize,Li,Australia
@@ -52,6 +55,7 @@ Female Under 18,Alice,Wu,Australia
 Female Under 18,Sophia,Feng,New Zealand
 Female Under 18,Michelle,Lin,Australia
 Female Under 18,Vicky,Qian,Australia
+Female Under 18,Athena-Malar,Retnaraja,AUS
 Female Under 18,Chloe,Fan,Austrlaia
 Female Under 18 ,Hinavakamea,Helu,Tonga
 Female Under 18,Natalie Terese,Camacho,Guam
@@ -76,6 +80,7 @@ Female Under 8,Vera (Jintian),Xu,New Zealand
 Female Under 8,Kalista,Liu,Australia
 Female Under 8,Eleanor,Wu,Australia
 Female Under 8,Jennifer (yuxian),Wang,Australia
+Female Under 8,Charlotte,Wang,Australia
 Female Under 8,Zariya,Mahajan,Australia
 Open Under 10,Joshua Kai- En,Huang,Australia
 Open Under 10,Huankai,Xu,New Zealand
@@ -96,6 +101,7 @@ Open Under 10,Leo,Lopatyuk,Guam
 Open Under 10,Leo,Kuncoro,Australia
 Open Under 10,Kaisar,Batyrbekov,Australia
 Open Under 10,RUOSHUI (RYAN),WANG,Australia
+Open Under 10,Ashwin,Ramanathan,Australia
 Open Under 10,RITHVIK,YENDLURI,Australia
 Open Under 10,Dharshan,Karthikeyan,Australia
 Open Under 10,Lucas,Parker,Australia
@@ -117,6 +123,8 @@ Open Under 10,Zane,Zhu,Australia
 Open Under 10,Joshua,Ren,Australia
 Open Under 10,Terrence,Li,Australia
 Open Under 10,Ayaansh,Vijay,Australia
+Open Under 10,John,stanton,Australia
+Open Under 10,noah,bidgood,ACF
 Open Under 10,Kiy,Kovalenko,Australia
 Open Under 10,Richard,Li-Zeng,Australia
 Open Under 12,Zack,Wang,New Zealand
@@ -160,6 +168,8 @@ Open Under 12,Allen,Yang,Australia
 Open Under 12,Marcus,So,Australia
 Open Under 12,John,Shu,Australia
 Open Under 12 ,Armaan ,Nand,Vanuatu
+Open Under 12,Mehghan,Dev Ananth,Australia
+Open Under 12,Samuel,Elliott,Australia
 Open Under 12,Martin,Xu,Australia
 Open Under 14,Avaneesh,Pai,Australia
 Open Under 14,Yuan,Huang,Australia
@@ -172,6 +182,10 @@ Open Under 14,Aiden,Maleki,Australia
 Open Under 14,Erkut,Tanin,Australia
 Open Under 14,Buthsara,Hettiarachchi,New Zealand
 Open Under 14,Nikolaj,Brdaric,Australia
+Open Under 14,Alvin,Vincent,Australia
+Open Under 14,Zachary,Pedros,Australia
+Open Under 14,Bojun (Bryan),Yang,Australia
+Open Under 14,Pavle-Jay,Ng,Australia
 Open Under 14,Phuc Bao Tam,Nguyen,Australia
 Open Under 14,Lionel,Vaurasi,Fiji
 Open Under 14,Témoé,Bellier Pontais,New Caledonia
@@ -206,6 +220,10 @@ Open Under 16,Rossi,Barnes,Australia
 Open Under 16,Ted,Power,Australia
 Open Under 16,Ben,Gordon,Australia
 Open Under 16,Novak,Nguyen,New Caledonia
+Open Under 16,Justin Zhide,Wang,New Zealand
+Open Under 16,Nathan,Moses,Australia
+Open Under 16,Taifeng (Matt),Lyu,Australia
+Open Under 16,Shivam,Karthikeyan,Australia
 Open Under 16,Ted,Power,Australia
 Open Under 16,Ben,Gordon,Australia
 Open Under 16,Gabriel,Harding,Australia
@@ -230,6 +248,7 @@ Open Under 18,Sam,Smith,Australia
 Open Under 18,Zhi Yu (Paul),He,New Zealand
 Open Under 18,Alvin,Shen,Australia
 Open Under 18,Tedric,Li,Australia
+Open Under 18,Oscar,Gao,Australia
 Open Under 18,William,Carrigan,Australia
 Open Under 18,Leo,Kalina,Australia
 Open Under 18,Xavier,Hong,Australia
@@ -239,6 +258,9 @@ Open Under 18,Alex,Devin,Australia
 Open Under 18,Leo,Kalina,Australia
 Open Under 18,Xavier,Hong,Australia
 Open Under 18,Ethan,Chang,Australia
+Open Under 18,Zachary,Yu,New Zealand
+Open Under 18,Rheyansh Reddy,Annapureddy,Australia
+Open Under 18,Benjamin Wise,Jiang,Australia
 Open Under 18,Daniel,Wang,Australia
 Open Under 18,Neil,Fu,Australia
 Open Under 18,Charles,Fu,Australia
@@ -272,6 +294,8 @@ Open Under 20,Ethan,Retnaraja,Australia
 Open Under 20,Shaurya,Jain,Ausralia
 Open Under 20,Jesse,Zafirakos,Australia
 Open Under 20,Ryder,Testolin,Ausralia
+Open Under 20,Kevin,Reid,Australia
+Open Under 20,Felix,Xie,New Zealand
 Open Under 20,Jayden,Ooi,Australia
 Open Under 8,Preston,Liu,Australia
 Open Under 8,Ryan,Hou,Australia
@@ -292,4 +316,7 @@ Open Under 8,Brian,Yang,Australia
 Open Under 8,Francis,Fu,Australia
 Open Under 8,Arthur,Zhou,New Zealand
 Open Under 8,Richard,Zang,Australia
-Open Under 8,Ian,CHEN,
+Open Under 8,Ian,CHEN,Australia
+Open Under 8,Isaac,Wang,Australia
+Open Under 8,Ethan,Guo,Australia
+Open Under 8,nathan,bidgood,ACF

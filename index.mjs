@@ -1,4 +1,5 @@
 import fs from 'fs';
+import Handlebars from 'handlebars';
 
 // Country to FIDE federation code mapping
 const countryToFideCode = {
@@ -7,8 +8,10 @@ const countryToFideCode = {
   'australia': 'AUS',
   'Ausralia': 'AUS',
   'AUS': 'AUS',
+  'ACF': 'AUS', // Australian Chess Federation
   'New Zealand': 'NZL',
   'NZL': 'NZL',
+  'NZ': 'NZL', // Short form of New Zealand
   'Guam': 'GUM',
   'Nauru': 'NRU',
   'Fiji': 'FIJ',
@@ -34,8 +37,10 @@ const countryToFlag = {
   'australia': '🇦🇺',
   'Ausralia': '🇦🇺',
   'AUS': '🇦🇺',
+  'ACF': '🇦🇺', // Australian Chess Federation
   'New Zealand': '🇳🇿',
   'NZL': '🇳🇿',
+  'NZ': '🇳🇿', // Short form of New Zealand
   'Guam': '🇬🇺',
   'GUM': '🇬🇺',
   'Nauru': '🇳🇷',
@@ -181,8 +186,43 @@ async function fetchFideRating(surname, firstName, country) {
     const html = await response.text();
     const results = parseFideResponse(html, fideCode);
     
+    // If multiple results, filter out players older than 20 years old by 1/1/2025
+    // A player is older than 20 if birthYear < 2005 (2025 - 20 = 2005)
+    let filteredResults = results;
+    if (results.length > 1) {
+      // Check if all results have the same name and FED (true duplicates)
+      const firstResult = results[0];
+      const allSameNameAndFed = results.every(r => 
+        r.name === firstResult.name && r.fedCode === firstResult.fedCode
+      );
+      
+      if (allSameNameAndFed) {
+        console.warn(`⚠️  Found ${results.length} duplicate players with same name and FED: "${firstResult.name}" (${firstResult.fedCode})`);
+        results.forEach((player, idx) => {
+          console.warn(`   [${idx + 1}] FIDE ID: ${player.fideId}, Birth Year: ${player.birthYear || 'N/A'}, Rating: ${player.stdRating || 'N/A'}`);
+        });
+      }
+      
+      filteredResults = results.filter(player => {
+        // If birthYear is missing, keep the player (to be safe)
+        if (!player.birthYear) return true;
+        
+        const birthYear = parseInt(player.birthYear);
+        // Keep players born in 2005 or later (20 years old or younger by 1/1/2025)
+        return birthYear >= 2005;
+      });
+      
+      // If all players were filtered out, fall back to original results
+      if (filteredResults.length === 0) {
+        filteredResults = results;
+        console.warn(`⚠️  All players filtered out for "${searchQuery}", using original results`);
+      } else if (filteredResults.length < results.length && allSameNameAndFed) {
+        console.warn(`   → Filtered to ${filteredResults.length} player(s) (removed players older than 20)`);
+      }
+    }
+    
     // Return the first matching result (or null if no match)
-    return results.length > 0 ? results[0] : null;
+    return filteredResults.length > 0 ? filteredResults[0] : null;
   } catch (error) {
     console.error(`Error fetching FIDE data for ${searchQuery}:`, error.message);
     return null;
@@ -395,6 +435,17 @@ const totalPlayers = playersToProcess.length;
 for (let i = 0; i < playersToProcess.length; i += CONCURRENT_REQUESTS) {
   const batch = playersToProcess.slice(i, i + CONCURRENT_REQUESTS);
   
+  // Check how many in this batch are cached (to skip delay if all cached)
+  let cachedInBatch = 0;
+  if (ENABLED_CACHE) {
+    batch.forEach(player => {
+      const cacheKey = `${player.Surname || ''},${player['First Name'] || ''},${player.Country || ''}`.toLowerCase();
+      if (cache[cacheKey]) {
+        cachedInBatch++;
+      }
+    });
+  }
+  
   // Process batch in parallel
   await Promise.all(batch.map((player, batchIndex) => processPlayer(player, i + batchIndex)));
   
@@ -403,8 +454,9 @@ for (let i = 0; i < playersToProcess.length; i += CONCURRENT_REQUESTS) {
     fs.writeFileSync(cacheFile, JSON.stringify(cache, null, 2), 'utf-8');
   }
   
-  // Rate limiting: small delay between batches
-  if (i + CONCURRENT_REQUESTS < playersToProcess.length) {
+  // Rate limiting: only delay if we made actual network requests (not all cached)
+  // Skip delay if all items in batch were from cache
+  if (i + CONCURRENT_REQUESTS < playersToProcess.length && cachedInBatch < batch.length) {
     await delay(REQUEST_DELAY);
   }
 }
@@ -417,454 +469,62 @@ if (ENABLED_CACHE) {
 
 console.log(`✅ Completed! Found FIDE ratings for ${found} out of ${totalPlayers} players.`);
 
-// Generate HTML
-const html = `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oceania Zonal Youth 2025 - Participants</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-    <style>
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px 0;
-        }
-        .container {
-            max-width: 1400px;
-        }
-        .header-card {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            padding: 30px;
-            margin-bottom: 30px;
-        }
-        .header-card h1 {
-            color: #667eea;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        .filter-section {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            padding: 25px;
-            margin-bottom: 30px;
-        }
-        .table-card {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            padding: 25px;
-            overflow-x: auto;
-        }
-        .table {
-            margin-bottom: 0;
-        }
-        .table thead {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-        .table thead th {
-            border: none;
-            padding: 15px;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 0.5px;
-        }
-        .table tbody tr {
-            transition: all 0.3s ease;
-        }
-        .table tbody tr:hover {
-            background-color: #f8f9fa;
-            transform: scale(1.01);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .table tbody td {
-            padding: 15px;
-            vertical-align: middle;
-            border-bottom: 1px solid #e9ecef;
-        }
-        .fide-title {
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-        .fide-rating {
-            font-weight: 700;
-            color: #667eea;
-            font-size: 1.1rem;
-        }
-        .table thead th {
-            cursor: pointer;
-            user-select: none;
-            position: relative;
-        }
-        .table thead th:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-        .table thead th.sortable::after {
-            content: ' ↕';
-            opacity: 0.5;
-            font-size: 0.8rem;
-        }
-        .table thead th.sort-asc::after {
-            content: ' ↑';
-            opacity: 1;
-        }
-        .table thead th.sort-desc::after {
-            content: ' ↓';
-            opacity: 1;
-        }
-        .fide-link {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .fide-link:hover {
-            color: #764ba2;
-            text-decoration: underline;
-        }
-        .badge-count {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-weight: 600;
-        }
-        .form-select {
-            border-radius: 10px;
-            border: 2px solid #e9ecef;
-            padding: 12px 15px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-        .form-select:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-        }
-        .stats-badge {
-            display: inline-block;
-            background: #f8f9fa;
-            padding: 10px 20px;
-            border-radius: 25px;
-            margin: 5px;
-            font-weight: 500;
-        }
-        .no-results {
-            text-align: center;
-            padding: 60px 20px;
-            color: #6c757d;
-        }
-        .no-results i {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            opacity: 0.3;
-        }
-        .info-icon {
-            color: #667eea;
-            cursor: pointer;
-            margin-left: 8px;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-        }
-        .info-icon:hover {
-            color: #764ba2;
-            transform: scale(1.2);
-        }
-        .country-flag {
-            font-size: 1.3rem;
-            margin-right: 6px;
-            vertical-align: middle;
-        }
-        .modal-content {
-            border-radius: 15px;
-            border: none;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-        .modal-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 15px 15px 0 0;
-            border: none;
-        }
-        .modal-header .btn-close {
-            filter: invert(1);
-        }
-        .modal-body a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .modal-body a:hover {
-            color: #764ba2;
-            text-decoration: underline;
-        }
-        @media (max-width: 768px) {
-            .header-card, .filter-section, .table-card {
-                padding: 20px;
-                margin-bottom: 20px;
-            }
-            .table {
-                font-size: 0.9rem;
-            }
-            .table thead th,
-            .table tbody td {
-                padding: 10px 8px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header-card">
-            <h1><i class="bi bi-trophy-fill"></i> 2025 Oceania Youth Chess Championship</h1>
-            <p class="text-muted mb-0">
-                All paid entries as of the 3rd of Dec
-                <i class="bi bi-info-circle info-icon" data-bs-toggle="modal" data-bs-target="#dataSourceModal" title="About this data"></i>
-            </p>
-        </div>
+// Prepare data for Handlebars template
+const tableHeaders = header.filter(h => h !== 'First Name' && h !== 'Surname');
 
-        <!-- Data Source Modal -->
-        <div class="modal fade" id="dataSourceModal" tabindex="-1" aria-labelledby="dataSourceModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="dataSourceModalLabel">
-                            <i class="bi bi-info-circle"></i> Data Source Information
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p><strong>About this data:</strong></p>
-                        <p>This data is extracted from the official Google Sheets source. For the most up-to-date real-time list, please visit:</p>
-                        <p>
-                            <a href="https://docs.google.com/spreadsheets/d/1kbWX5j6PMq-WFI7mjdYnup_J3YY5xkfrTBmQZuqMpWU/edit?gid=1450537835#gid=1450537835" target="_blank" rel="noopener noreferrer">
-                                <i class="bi bi-box-arrow-up-right"></i>
-                                View Real-time List on Google Sheets
-                            </a>
-                        </p>
-                        <hr>
-                        <p><strong>Official Event Website:</strong></p>
-                        <p>
-                            <a href="https://sites.google.com/view/oceaniayouthzonal2025/home" target="_blank" rel="noopener noreferrer">
-                                <i class="bi bi-globe"></i>
-                                2025 Oceania Youth Chess Championship
-                            </a>
-                        </p>
-                        <hr>
-                        <p><strong>FIDE Ratings:</strong></p>
-                        <p>FIDE ratings are automatically fetched from the official FIDE ratings database. Ratings are matched by player name and country to ensure accuracy.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+const tableRows = dataList.map((row, index) => {
+  // Create name display: use FIDE name if available, otherwise "Surname, First Name"
+  let displayName = '';
+  if (row.FIDEName) {
+    displayName = row.FIDEName;
+  } else {
+    const surname = row.Surname || '';
+    const firstName = row['First Name'] || '';
+    displayName = surname && firstName ? `${surname}, ${firstName}` : (surname || firstName || '');
+  }
+  
+  // Make name a link to FIDE profile if FIDE ID exists
+  const nameDisplay = row.FIDEId
+    ? `<a href="https://ratings.fide.com/profile/${row.FIDEId}" target="_blank" rel="noopener noreferrer" class="fide-link" title="View FIDE Profile">${displayName}</a>`
+    : displayName;
+  
+  // Prepare table cells
+  const cells = tableHeaders.map(h => {
+    // Special handling for Country column to show flag
+    if (h === 'Country') {
+      const flag = getCountryFlag(row[h] || '');
+      return flag ? `<span class="country-flag">${flag}</span>${row[h] || ''}` : (row[h] || '');
+    }
+    return row[h] || '';
+  });
+  
+  return {
+    index: index + 1,
+    division: row.Division || '',
+    rating: row.FIDERating || '0',
+    cells: cells,
+    nameDisplay: nameDisplay,
+    nameSort: displayName.toLowerCase(),
+    titleDisplay: row.FIDETitle ? `<span class="badge bg-primary fide-title">${row.FIDETitle}</span>` : '<span class="text-muted">-</span>',
+    ratingDisplay: row.FIDERating ? `<span class="fide-rating">${row.FIDERating}</span>` : '<span class="text-muted">-</span>',
+    ratingSort: row.FIDERating || '0'
+  };
+});
 
-        <div class="filter-section">
-            <div class="row g-3 align-items-end">
-                <div class="col-md-6">
-                    <label for="divisionFilter" class="form-label fw-bold">
-                        <i class="bi bi-funnel-fill"></i> Filter by Division
-                    </label>
-                    <select class="form-select" id="divisionFilter">
-                        <option value="">All Divisions</option>
-                        ${divisions.map(div => `<option value="${div}">${div}</option>`).join('')}
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <div class="stats-badge">
-                        <i class="bi bi-people-fill"></i> 
-                        <span id="recordCount">${dataList.length}</span> participants
-                    </div>
-                </div>
-            </div>
-        </div>
+// Read Handlebars template
+const templateSource = fs.readFileSync('index.html.hbs', 'utf-8');
+const template = Handlebars.compile(templateSource);
 
-        <div class="table-card">
-            <div id="tableContainer">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            ${header.filter(h => h !== 'First Name' && h !== 'Surname').map(h => `<th class="sortable" data-sort="${h}">${h}</th>`).join('')}
-                            <th class="sortable" data-sort="Name">Name</th>
-                            <th class="sortable" data-sort="FIDETitle">FIDE Title</th>
-                            <th class="sortable" data-sort="FIDERating">FIDE Rating</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody">
-                        ${dataList.map((row, index) => {
-                          // Create name display: use FIDE name if available, otherwise "Surname, First Name"
-                          let displayName = '';
-                          if (row.FIDEName) {
-                            displayName = row.FIDEName;
-                          } else {
-                            const surname = row.Surname || '';
-                            const firstName = row['First Name'] || '';
-                            displayName = surname && firstName ? `${surname}, ${firstName}` : (surname || firstName || '');
-                          }
-                          
-                          // Make name a link to FIDE profile if FIDE ID exists
-                          const nameDisplay = row.FIDEId
-                            ? `<a href="https://ratings.fide.com/profile/${row.FIDEId}" target="_blank" rel="noopener noreferrer" class="fide-link" title="View FIDE Profile">${displayName}</a>`
-                            : displayName;
-                          
-                          return `
-                            <tr data-division="${row.Division || ''}" data-rating="${row.FIDERating || '0'}">
-                                <td>${index + 1}</td>
-                                ${header.filter(h => h !== 'First Name' && h !== 'Surname').map(h => {
-                                  // Special handling for Country column to show flag
-                                  if (h === 'Country') {
-                                    const flag = getCountryFlag(row[h] || '');
-                                    return `<td>${flag ? `<span class="country-flag">${flag}</span>` : ''}${row[h] || ''}</td>`;
-                                  }
-                                  return `<td>${row[h] || ''}</td>`;
-                                }).join('')}
-                                <td data-sort-value="${displayName.toLowerCase()}">${nameDisplay}</td>
-                                <td>${row.FIDETitle ? `<span class="badge bg-primary fide-title">${row.FIDETitle}</span>` : '<span class="text-muted">-</span>'}</td>
-                                <td data-sort-value="${row.FIDERating || '0'}">${row.FIDERating ? `<span class="fide-rating">${row.FIDERating}</span>` : '<span class="text-muted">-</span>'}</td>
-                            </tr>
-                          `;
-                        }).join('')}
-                    </tbody>
-                </table>
-            </div>
-            <div id="noResults" class="no-results" style="display: none;">
-                <i class="bi bi-inbox"></i>
-                <h4>No participants found</h4>
-                <p>Try selecting a different division</p>
-            </div>
-        </div>
-    </div>
+// Prepare template data
+const templateData = {
+  divisions: divisions,
+  totalRecords: dataList.length,
+  tableHeaders: tableHeaders,
+  tableRows: tableRows
+};
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const divisionFilter = document.getElementById('divisionFilter');
-        const tableBody = document.getElementById('tableBody');
-        const rows = Array.from(tableBody.querySelectorAll('tr'));
-        const recordCount = document.getElementById('recordCount');
-        const noResults = document.getElementById('noResults');
-        const tableContainer = document.getElementById('tableContainer');
-
-        function filterTable() {
-            const selectedDivision = divisionFilter.value;
-            let visibleCount = 0;
-            
-            // Get fresh rows list (in case table was sorted)
-            const currentRows = Array.from(tableBody.querySelectorAll('tr'));
-
-            currentRows.forEach((row) => {
-                const rowDivision = row.getAttribute('data-division');
-                if (!selectedDivision || rowDivision === selectedDivision) {
-                    row.style.display = '';
-                    visibleCount++;
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-
-            recordCount.textContent = visibleCount;
-
-            if (visibleCount === 0) {
-                tableContainer.style.display = 'none';
-                noResults.style.display = 'block';
-            } else {
-                tableContainer.style.display = 'block';
-                noResults.style.display = 'none';
-            }
-        }
-
-        divisionFilter.addEventListener('change', filterTable);
-
-        // Table sorting functionality
-        let currentSort = {
-            column: null,
-            direction: 'asc'
-        };
-
-        function sortTable(column, direction) {
-            const tbody = tableBody;
-            const rows = Array.from(tbody.querySelectorAll('tr'));
-            
-            // Remove sort classes from all headers
-            document.querySelectorAll('th.sortable').forEach(th => {
-                th.classList.remove('sort-asc', 'sort-desc');
-            });
-            
-            // Add sort class to current header
-            const header = document.querySelector('th[data-sort="' + column + '"]');
-            if (header) {
-                header.classList.add(direction === 'asc' ? 'sort-asc' : 'sort-desc');
-            }
-            
-            // Sort rows
-            rows.sort((a, b) => {
-                let aValue, bValue;
-                
-                // Get cell value based on column index
-                const columnIndex = Array.from(document.querySelectorAll('th')).findIndex(th => th.getAttribute('data-sort') === column);
-                if (columnIndex === -1) return 0;
-                
-                const aCell = a.querySelectorAll('td')[columnIndex];
-                const bCell = b.querySelectorAll('td')[columnIndex];
-                
-                if (column === 'FIDERating') {
-                    // Sort by numeric rating value using data-sort-value attribute
-                    aValue = parseInt(aCell?.getAttribute('data-sort-value') || '0');
-                    bValue = parseInt(bCell?.getAttribute('data-sort-value') || '0');
-                    return direction === 'asc' ? aValue - bValue : bValue - aValue;
-                } else {
-                    // String comparison for other columns
-                    aValue = aCell ? (aCell.textContent || '').trim().toLowerCase() : '';
-                    bValue = bCell ? (bCell.textContent || '').trim().toLowerCase() : '';
-                }
-                
-                // String comparison
-                if (aValue < bValue) return direction === 'asc' ? -1 : 1;
-                if (aValue > bValue) return direction === 'asc' ? 1 : -1;
-                return 0;
-            });
-            
-            // Re-append sorted rows
-            rows.forEach(row => tbody.appendChild(row));
-            
-            // Update current sort
-            currentSort = { column, direction };
-            
-            // Re-apply filter if active (use setTimeout to ensure DOM is updated)
-            if (divisionFilter.value) {
-                setTimeout(() => filterTable(), 0);
-            }
-        }
-
-        // Add click handlers to sortable headers
-        document.querySelectorAll('th.sortable').forEach(header => {
-            header.addEventListener('click', () => {
-                const column = header.getAttribute('data-sort');
-                if (!column) return;
-                
-                // Toggle direction if clicking same column
-                if (currentSort.column === column) {
-                    currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
-                } else {
-                    currentSort.direction = 'asc';
-                }
-                
-                sortTable(column, currentSort.direction);
-            });
-        });
-    </script>
-</body>
-</html>`;
+// Generate HTML using Handlebars
+const html = template(templateData);
 
 // Write HTML file to www folder
 fs.writeFileSync('www/index.html', html, 'utf-8');

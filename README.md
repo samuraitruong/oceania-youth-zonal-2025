@@ -216,3 +216,4 @@ For questions about the event, please contact:
 - FIDE ratings from the official FIDE database
 - Built with Bootstrap 5 and modern web technologies
 
+
