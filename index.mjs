@@ -290,6 +290,9 @@ async function fetchCsvFromGoogleSheets() {
 const csvContent = await fetchCsvFromGoogleSheets();
 const lines = csvContent.split('\n').filter(line => line.trim() !== '');
 
+// Extract header text from first line (e.g., "All paid entries as of the 7th of Dec")
+const headerText = lines[0].split(',')[0].trim();
+
 // Skip first line, get header from second line
 const header = lines[1].split(',').map(h => h.trim());
 
@@ -517,6 +520,7 @@ const template = Handlebars.compile(templateSource);
 
 // Prepare template data
 const templateData = {
+  headerText: headerText,
   divisions: divisions,
   totalRecords: dataList.length,
   tableHeaders: tableHeaders,
